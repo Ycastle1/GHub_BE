@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ECF0E1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        h2 {
+            text-align: center;
+            color: darkslategray;
+            margin-bottom: 20px;
+            margin-top: 0;
+            padding-top: 20px;
+            border-top: 5px solid #d8ddd8;
+        }
+
+        input {
+            width: 196px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            border-color: #009000;
+            outline: none;
+        }
+
+        label {
+            color: darkslategrey;
+            margin-left: 11px;
+            margin-right: 10px;
+        }
+
+        #phone1 {
+            width: 29px;
+            margin-right: 5px;
+        }
+
+        #phone2, #phone3 {
+            margin-left: 5px;
+            width: 37px;
+        }
+
+        #phone2 {
+            margin-right: 5px;
+        }
+
+        #birth {
+            width: 196px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #009000/*#007BFF*/;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.1s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #007500/*#0056b3*/ ;
+        }
+
+        a {
+            margin-top: 10px;
+            color: darkslategray;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center; /* 가로 중앙 정렬 */
+            margin-top: 15px;
+        }
+
+        .link-container {
+            padding-right: 20px;
+        }
+
+        .link-container a:first-child {
+            display: inline-block;
+            margin-top: 0px;
+        }
+
+        .link-container a:nth-child(2nd) {
+            margin-top: 0px;
+            display: inline-block;
+        }
+
+        .link-container:nth-child(2)::before {
+            content: "|";  /* 앞에 구분선 추가 */
+            margin-right: 20px;  /* 구분선과 텍스트 사이 간격 */
+            color: gray;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            color: darkslategray;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .link {
+            display: inline-flex;
+            align-items: center; /* 세로 정렬 */
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 0;
+            margin-right: 10px;
+        }
+
+        .link:nth-child(2)::before, .link:nth-child(3)::before {
+            content: "|";  /* 앞에 구분선 추가 */
+            margin-right: 15px;  /* 구분선과 텍스트 사이 간격 */
+            color: darkslategray;
+        }
+
+        .link:last-child {
+            margin-right: 0;
+        }
+
+        .link img {
+            width: 15px;
+            height: auto;
+            vertical-align: middle; /* 텍스트와 같은 높이로 정렬 */
+            margin-right: 5px; /* 이미지와 텍스트 사이 간격 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i>Online<br>Locker Room</i></h1>
+        <h2>사용자 정보 확인</h2>
+        <div class="user-name">
+            <label for="loginUsername">사용자명</label>
+            <input type="text" id="loginUsername" placeholder="홍길동" autocomplete="username">
+        </div>
+        <div class="phone-number">
+            <label for="phone1">전화번호</label>
+            <input type="text" id="phone1" maxlength="3" size="3" oninput="filterNumbers(this, 'phone2')" placeholder="010"> -
+            <input type="text" id="phone2" maxlength="4" size="4" oninput="filterNumbers(this, 'phone3')" placeholder="1234"> -
+            <input type="text" id="phone3" maxlength="4" size="4" oninput="filterNumbers(this)" placeholder="5678">
+        </div>
+        <div class="birth-date">
+            <label for="birth">생년월일</label>
+            <input type="date" id="birth" max="9999-12-31">
+        </div>
+        <button onclick="check_user()">비밀번호 변경하기</button>
+        <div class="nav-container">
+            <div class="link-container" style="width: 148px; text-align: right;"><a href="index.html">로그인</a></div>
+            <div class="link-container" style="width: 152px;"><a href="register.html">회원가입</a></div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Dku Bool-Dozer. All rights reserved.</p>
+            <p>
+                <a href="https://cms.dankook.ac.kr/web/ace" class="link" target="_blank">
+                    <img src="Dku_logo.png" alt="DkuCE"> DKU[CE]</a>
+                <a href="https://www.instagram.com/dku_booldozer/" class="link" target="_blank">
+                    <img src="Instagram_icon.png.webp" alt="Instagram"> Instagram</a>
+                <a href="https://open.kakao.com/o/ssulAJ9g" class="link" target="_blank">
+                    <img src="KakaoTalk_logo.svg.png" alt="Kakaotalk"> KakaoTalk</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // 페이지 로드 후 초기 설정
+        document.addEventListener('DOMContentLoaded', () => {
+            const usernameInput = document.getElementById('loginUsername');
+            usernameInput.focus(); // 자동으로 포커스 설정
+        });
+
+        // 사용자 정보 확인 함수
+        function check_user() {
+            const username = document.getElementById('loginUsername').value;
+            const tel1 = document.getElementById('phone1').value
+            const tel2 = document.getElementById('phone2').value
+            const tel3 = document.getElementById('phone3').value;
+            const tel = document.getElementById('phone1').value
+                        + document.getElementById('phone2').value
+                        + document.getElementById('phone3').value;
+            const birth = document.getElementById('birth').value;
+
+            if (!username || !tel1 || !tel2 || !tel3 || !birth ) {
+                alert('사용자 정보를 모두 입력하세요.');
+                return;
+            }
+
+            // 서버로 사용자 정보 확인 요청
+            fetch('http://localhost:8080/api/users/check-user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, tel, birth }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        response.json().then((data) => {
+                            // 사용자 데이터를 로컬 스토리지에 저장
+                            localStorage.setItem('userData', JSON.stringify(data));
+                            // 회원 정보 페이지로 이동
+                            window.location.href = 'repassword.html';
+                        });
+                    } else {
+                        response.text().then((text) => {
+                            alert(text); // 서버에서 반환한 에러 메시지 표시
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error('사용자 확인 중 문제가 발생했습니다:', error);
+                    alert('사용자 확인 중 문제가 발생했습니다.');
+                });
+        }
+
+        function filterNumbers(current, nextFieldId) {
+            current.value = current.value.replace(/[^0-9]/g, ''); // 숫자만 허용
+            if (nextFieldId && current.value.length >= current.maxLength) {
+                document.getElementById(nextFieldId).focus(); // 다음 필드로 이동
+            }
+        }
+
+        // 엔터키 이벤트 추가
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                check_user(); // 로그인 함수 호출
+            }
+        });
+    </script>
+</body>
+</html>
